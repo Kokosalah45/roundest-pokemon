@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 import { getPokemonData } from "../api/pokemon";
-const Paginate = ({ pageSize, pageCount }) => {
+export default function Paginate({ pageSize, pageCount }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [noOfPages, setNoOfPages] = useState(0);
   const [take, setTake] = useState(0);
@@ -47,6 +47,4 @@ const Paginate = ({ pageSize, pageCount }) => {
       <div>{JSON.stringify(data)}</div>
     </>
   );
-};
-
-export default Paginate;
+}
