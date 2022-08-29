@@ -1,7 +1,10 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://pokemon-rest-api.herokuapp.com",
+  baseURL:
+    process.env.NODE_ENV === "development"
+      ? "http://127.0.0.1:5000"
+      : "https://pokemon-rest-api.herokuapp.com",
   headers: {
     Accept: "application/json",
     "content-type": "application/json",
