@@ -40,11 +40,11 @@ export default function Home() {
       </Head>
 
       <main className="min-h-screen bg-gradient-to-r from-vivid-purple to-magneta bg-black grid place-items-center text-white">
-        <div className="w-dynamic bg-purple-800  rounded-md overflow-hidden shadow-2xl">
+        <div className="w-dynamic bg-purple-800  rounded-md overflow-hidden shadow-2xl relative my-8 ">
           <h1 className="capitalize p-5 font-bold text-center text-2xl border-x-2 border-t-2">
             Which is the roundest ?
           </h1>
-          <div className=" flex gap-8 justify-between flex-col md:flex-row relative  md:h-120 border-x-2 border-y-0 md:border-x-0 md:border-y-2">
+          <div className=" flex gap-8 justify-between flex-col md:flex-row min-h-screen md:h-120 md:min-h-0  border-x-2 border-y-0 md:border-x-0 md:border-y-2">
             {isFetching ? (
               <div className="absolute inset-0 grid place-items-center">
                 <ImSpinner8 className="animate-spin w-14 h-14" />

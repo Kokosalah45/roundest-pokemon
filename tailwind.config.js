@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       spacing: {
         120: "26.25rem",
+
         dynamic: "min(90% , 1200px)",
       },
       colors: {
