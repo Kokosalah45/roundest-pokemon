@@ -1,7 +1,30 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
+import { useRef } from "react";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+export default function MyApp({ Component, pageProps }) {
+  const { current } = useRef(
+    new QueryClient({
+      defaultOptions: {
+        queries: {
+          refetchOnWindowFocus: false,
+          refetchOnMount: false,
+        },
+      },
+    })
+  );
+
+  return (
+    <QueryClientProvider client={current}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <Component {...pageProps} />
+      </Hydrate>
+      <ReactQueryDevtools></ReactQueryDevtools>
+    </QueryClientProvider>
+  );
 }
-
-export default MyApp
