@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { useQuery, QueryClient, dehydrate } from "@tanstack/react-query";
 import shortid from "shortid";
 import { getRandomPairPokemon } from "../api/pokemon";
@@ -40,6 +41,11 @@ export default function Home() {
       </Head>
 
       <main className="min-h-screen bg-gradient-to-r from-vivid-purple to-magneta bg-black grid place-items-center text-white">
+        <Link href="/vote-results">
+          <a className="fixed top-14 -translate-y-1/2 bg-purple-900  rounded-sm right-4 p-3">
+            Results !
+          </a>
+        </Link>
         <div className="w-dynamic bg-purple-800  rounded-md overflow-hidden shadow-2xl relative my-8 ">
           <h1 className="capitalize p-5 font-bold text-center text-2xl border-x-2 border-t-2">
             Which is the roundest ?
@@ -50,7 +56,7 @@ export default function Home() {
                 <ImSpinner8 className="animate-spin w-14 h-14" />
               </div>
             ) : (
-              pokemonPair.map(({ name, img_url }, index) => (
+              pokemonPair?.map(({ name, img_url }, index) => (
                 <figure
                   data-index={index}
                   key={shortid.generate()}

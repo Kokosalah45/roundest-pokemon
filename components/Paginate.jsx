@@ -15,7 +15,7 @@ export default function Paginate({ pageSize, pageCount }) {
     // eslint-disable-next-line
   }, []);
 
-  const { data, isLoading } = useQuery(["page", currentPage + 1], () =>
+  const { data, isFetching } = useQuery(["page", currentPage + 1], () =>
     getPokemonData(currentPage * pageSize, pageSize)
   );
   const next = () => {
@@ -55,14 +55,15 @@ export default function Paginate({ pageSize, pageCount }) {
             </tr>
           </thead>
           <tbody>
-            {!data ? (
+            {isFetching && (
               <tr className="min-h-screen w-full relative">
                 <td className="h-screen " colSpan="3"></td>
                 <div className="absolute inset-0 grid place-items-center dark:bg-gray-700">
                   <ImSpinner8 className="animate-spin w-14 h-14" />
                 </div>
               </tr>
-            ) : (
+            )}
+            {data &&
               data?.results?.map(
                 ({ name, img_url, voted_for, voted_against }) => (
                   <tr
@@ -88,8 +89,7 @@ export default function Paginate({ pageSize, pageCount }) {
                     <td className="py-4 px-6">{voted_against}</td>
                   </tr>
                 )
-              )
-            )}
+              )}
           </tbody>
         </table>
       </div>
