@@ -36,62 +36,65 @@ export default function Paginate({ pageSize, pageCount }) {
             <MdNavigateNext className="w-8 h-8 rounded-[50%] border-2 text-white cursor-pointer hover:text-black hover:bg-white transition-all" />
           </button>
         </div>
-
-        <table className=" w-full text-white  table-fixed rounded-lg overflow-hidden capitalize text-lg text-center ">
-          <thead className="text-xs  uppercase  bg-gray-700 text-gray-400">
-            <tr>
-              <th scope="col" className="py-3 px-6">
-                Pokemon Name
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Image
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Voted for
-              </th>
-              <th scope="col" className="py-3 px-6">
-                Voted against
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {isFetching && (
-              <tr className="min-h-screen w-full relative">
-                <td className="h-screen " colSpan="3"></td>
-                <div className="absolute inset-0 grid place-items-center bg-gray-700">
-                  <ImSpinner8 className="animate-spin w-14 h-14" />
-                </div>
+        <div className="relative text-white">
+          <table className=" w-full table-fixed rounded-lg overflow-hidden capitalize text-lg text-center ">
+            <thead className="text-xs  uppercase  bg-gray-700 text-gray-400">
+              <tr>
+                <th scope="col" className="py-3 px-6">
+                  Pokemon Name
+                </th>
+                <th scope="col" className="py-3 px-6">
+                  Image
+                </th>
+                <th scope="col" className="py-3 px-6">
+                  Voted for
+                </th>
+                <th scope="col" className="py-3 px-6">
+                  Voted against
+                </th>
               </tr>
-            )}
-            {data &&
-              data?.results?.map(
-                ({ name, img_url, voted_for, voted_against }) => (
-                  <tr
-                    className="border-b bg-gray-800 border-gray-700  cursor-pointer hover:bg-green-500 select-none"
-                    key={shortid.generate()}
-                  >
-                    <th
-                      scope="row"
-                      className="py-4 px-6 font-medium  whitespace-nowrap text-white"
-                    >
-                      {name}
-                    </th>
-                    <td className="py-4 px-6">
-                      <Image
-                        src={img_url}
-                        layout="fixed"
-                        width={80}
-                        height={80}
-                        alt={`image of ${name} pokemon`}
-                      />
-                    </td>
-                    <td className="py-4 px-6">{voted_for}</td>
-                    <td className="py-4 px-6">{voted_against}</td>
-                  </tr>
-                )
+            </thead>
+            <tbody>
+              {isFetching && (
+                <tr className="min-h-screen w-full">
+                  <td className="h-screen" colSpan="3"></td>
+                </tr>
               )}
-          </tbody>
-        </table>
+              {data &&
+                data?.results?.map(
+                  ({ name, img_url, voted_for, voted_against }) => (
+                    <tr
+                      className="border-b bg-gray-800 border-gray-700  cursor-pointer hover:bg-green-500 select-none"
+                      key={shortid.generate()}
+                    >
+                      <th
+                        scope="row"
+                        className="py-4 px-6 font-medium  whitespace-nowrap text-white"
+                      >
+                        {name}
+                      </th>
+                      <td className="py-4 px-6">
+                        <Image
+                          src={img_url}
+                          layout="fixed"
+                          width={80}
+                          height={80}
+                          alt={`image of ${name} pokemon`}
+                        />
+                      </td>
+                      <td className="py-4 px-6">{voted_for}</td>
+                      <td className="py-4 px-6">{voted_against}</td>
+                    </tr>
+                  )
+                )}
+            </tbody>
+          </table>
+          {isFetching && (
+            <div className="absolute inset-0 grid place-items-center rounded-lg bg-gray-700">
+              <ImSpinner8 className="animate-spin w-14 h-14" />
+            </div>
+          )}
+        </div>
       </div>
 
       <button onClick={() => setCurrentPage(noOfPages)}>
