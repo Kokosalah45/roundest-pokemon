@@ -38,7 +38,7 @@ export default function Paginate({ pageSize, pageCount }) {
         </div>
 
         <table className=" w-full text-white  table-fixed rounded-lg overflow-hidden capitalize text-lg text-center ">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="text-xs  uppercase  bg-gray-700 text-gray-400">
             <tr>
               <th scope="col" className="py-3 px-6">
                 Pokemon Name
@@ -58,7 +58,7 @@ export default function Paginate({ pageSize, pageCount }) {
             {isFetching && (
               <tr className="min-h-screen w-full relative">
                 <td className="h-screen " colSpan="3"></td>
-                <div className="absolute inset-0 grid place-items-center dark:bg-gray-700">
+                <div className="absolute inset-0 grid place-items-center bg-gray-700">
                   <ImSpinner8 className="animate-spin w-14 h-14" />
                 </div>
               </tr>
@@ -67,12 +67,12 @@ export default function Paginate({ pageSize, pageCount }) {
               data?.results?.map(
                 ({ name, img_url, voted_for, voted_against }) => (
                   <tr
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700  cursor-pointer hover:bg-green-500 select-none"
+                    className="border-b bg-gray-800 border-gray-700  cursor-pointer hover:bg-green-500 select-none"
                     key={shortid.generate()}
                   >
                     <th
                       scope="row"
-                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="py-4 px-6 font-medium  whitespace-nowrap text-white"
                     >
                       {name}
                     </th>
