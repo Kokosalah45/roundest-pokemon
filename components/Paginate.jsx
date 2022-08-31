@@ -15,9 +15,12 @@ export default function Paginate({ pageSize, pageCount }) {
     // eslint-disable-next-line
   }, []);
 
-  const { data, isFetching } = useQuery(["page", currentPage + 1], () =>
-    getPokemonData(currentPage * pageSize, pageSize)
+  const { data, isFetching, isLoading } = useQuery(
+    ["page", currentPage + 1],
+    () => getPokemonData(currentPage * pageSize, pageSize)
   );
+  console.log(isFetching, isLoading);
+  console.log(isFetching || isLoading);
   const next = () => {
     setCurrentPage(currentPage + 1);
   };
@@ -55,7 +58,7 @@ export default function Paginate({ pageSize, pageCount }) {
               </tr>
             </thead>
             <tbody>
-              {isFetching && (
+              {(isFetching || isLoading) && (
                 <tr className="min-h-screen w-full">
                   <td className="h-screen" colSpan="3"></td>
                 </tr>
@@ -80,6 +83,7 @@ export default function Paginate({ pageSize, pageCount }) {
                           width={80}
                           height={80}
                           alt={`image of ${name} pokemon`}
+                          priority
                         />
                       </td>
                       <td className="py-4 px-6">{voted_for}</td>
@@ -89,7 +93,7 @@ export default function Paginate({ pageSize, pageCount }) {
                 )}
             </tbody>
           </table>
-          {isFetching && (
+          {(isFetching || isLoading) && (
             <div className="absolute inset-0 grid place-items-center rounded-lg bg-gray-700">
               <ImSpinner8 className="animate-spin w-14 h-14" />
             </div>
