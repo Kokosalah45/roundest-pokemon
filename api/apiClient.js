@@ -4,7 +4,7 @@ const apiClient = axios.create({
   baseURL:
     process.env.NODE_ENV === "development"
       ? "http://127.0.0.1:5000"
-      : "https://pokemon-rest-api-new.herokuapp.com",
+      : "https://poke-miniapi-production.up.railway.app/",
   headers: {
     Accept: "application/json",
     "content-type": "application/json",
